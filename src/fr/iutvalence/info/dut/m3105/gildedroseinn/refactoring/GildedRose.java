@@ -25,8 +25,13 @@ public class GildedRose
 
 	public static void updateItem(Item item)
 	{	
-		decrementItemQuality(item);
 		decrementItemSellIn(item);
+		if (item.getQuality() >0) {
+			decrementItemQuality(item);
+			if(item.getSellIn()<0 && item.getQuality()>0) {
+				decrementItemQuality(item);
+			}
+		}
 	}
 
 	private static void decrementItemSellIn(Item item)

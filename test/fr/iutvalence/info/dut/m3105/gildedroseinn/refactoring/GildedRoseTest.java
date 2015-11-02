@@ -9,10 +9,27 @@ public class GildedRoseTest
 	@Test
 	public void qualityAndSellInOfItemShouldDecreaseByOneEveryday()
 	{
-		Item item = new Item("Bonjour", 30,20);
-		GildedRose.updateItem(item);
-		assertEquals(item.getSellIn(), 29);
-		assertEquals(item.getQuality(),19);
+		testUpdateItem(new ItemForTest(new Item("Bonjour", 30, 20),29,19));
+	}
+
+	@Test
+	public void ifSellInIsPastSellInShouldDecreaseByOneAndQualityByTwoEveryday()
+	{
+		testUpdateItem(new ItemForTest(new Item("Bonjour", -2, 25),-3,23));
 	}
 	
+	@Test
+	public void qualityHasToBePositive()
+	{
+		testUpdateItem(new ItemForTest(new Item("Bonjour", 25, 1),24,0));
+		testUpdateItem(new ItemForTest(new Item("Bonjour", -1, 1),-2,0));
+		
+	}
+	
+	private void testUpdateItem(ItemForTest itemForTest)
+	{
+		GildedRose.updateItem(itemForTest.getItemForTest());
+		assertEquals(itemForTest.getItemForTest().getSellIn(), itemForTest.getSellInResult());
+		assertEquals(itemForTest.getItemForTest().getQuality(), itemForTest.getQualityResult());
+	}
 }
