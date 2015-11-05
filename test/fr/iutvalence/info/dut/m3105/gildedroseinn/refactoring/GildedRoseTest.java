@@ -26,6 +26,19 @@ public class GildedRoseTest
 		
 	}
 	
+	@Test
+	public void qualityOfAgedBrieIncreasesUntilFifty()
+	{
+		testUpdateItem(new ItemForTest(new Item("Aged Brie", 25, 23),24,24));
+		testUpdateItem(new ItemForTest(new Item("Aged Brie", 25, 50),24,50));
+	}
+	
+	@Test
+	public void ifItemIsSulfurasItNeverAlters()
+	{
+		testUpdateItem(new ItemForTest(new Item("Sulfuras, Hand of Ragnaros", 0, 80),0,80));
+	}
+	
 	private void testUpdateItem(ItemForTest itemForTest)
 	{
 		GildedRose.updateItem(itemForTest.getItemForTest());
